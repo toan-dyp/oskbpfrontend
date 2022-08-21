@@ -1,0 +1,20 @@
+.App {
+  text-align: -webkit-center;
+}
+
+.button {
+  top: 100px;
+  width: 15%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+
+  &__next {
+    cursor: pointer;
+  }
+
+  &__text {
+    font-size: 25px;
+    color: red;
+  }
+}

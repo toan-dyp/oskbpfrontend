@@ -1,0 +1,63 @@
+/**
+ * Memory.scss
+ * BP_PREMIUM_WEBVIEW
+ * Created by tienld@vitalify.asia on 26/07/2022
+ * Copyright (c) 2022 OMRON HEALTHCARE Co.,Ltd. All rights reserved.
+ */
+.memory {
+  margin-top: 100px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+
+  &_label {
+    width: 17.438rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &_wrap {
+      display: flex;
+      width: calc(100% / 3);
+
+      &_bar {
+        width: 0.063rem;
+        height: 1.938rem;
+      }
+
+      &_title {
+        padding-left: 0.25rem;
+        font-weight: 700;
+        font-size: 0.625rem;
+        line-height: 0.938rem;
+      }
+
+      &_complete {
+        text-align: center;
+        height: 1.938rem;
+        font-weight: 700;
+        font-size: 0.625rem;
+        line-height: 0.938rem;
+      }
+    }
+  }
+
+  &_progressbar {
+    margin-top: -8px;
+
+    .progressbar {
+      height: 0.5rem;
+      width: 17.438rem;
+      background: var(--bg-box-color);
+      border-radius: 0rem 0.25rem 0.25rem 0rem;
+
+      & span {
+        background-image: var(--gradation_blue);
+        border-radius: 0rem 0.25rem 0.25rem 0rem;
+      }
+    }
+
+  }
+
+}

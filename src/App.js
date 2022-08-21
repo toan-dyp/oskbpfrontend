@@ -1,23 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.scss";
+import Memory from "./components/Memory/Memory";
+import Framework7 from "framework7/lite-bundle";
+import Framework7React from "framework7-react";
+import "framework7/css/bundle";
+Framework7.use(Framework7React);
 
 function App() {
+  const [step, setStep] = useState(0);
+  const _HandleStep = () => {
+    setStep(step + 1);
+  };
+  const _HandleStepPrev = () => {
+    setStep(step - 1);
+  };
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Memory x={step} />
+      <div className="button">
+        <button className="button__next" onClick={_HandleStep}>
+          NEXT
+        </button>
+        <button className="button_next" onClick={_HandleStepPrev}>
+          Prev
+        </button>
+      </div>
+      <div className="button__text">{step}</div>
     </div>
   );
 }
