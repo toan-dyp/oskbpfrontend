@@ -15,6 +15,7 @@ function App() {
     setStep(step - 1);
   };
   return (
+    //
     <div className="App">
       <Memory x={step} />
       <div className="button">
