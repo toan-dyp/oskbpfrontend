@@ -8,21 +8,21 @@ Framework7.use(Framework7React);
 // sase
 function App() {
   const [step, setStep] = useState(0);
-  const _HandleStep = () => {
+  const handleStep = () => {
     setStep(step + 1);
   };
-  const _HandleStepPrev = () => {
-    setStep(step - 1);
+  const handleStepPrev = () => {
+    step > 0 && setStep(step - 1);
   };
   return (
     //
     <div className="App">
       <Memory x={step} />
       <div className="button">
-        <button className="button__next" onClick={_HandleStep}>
+        <button className="button__next" onClick={handleStep}>
           NEXT
         </button>
-        <button className="button_next" onClick={_HandleStepPrev}>
+        <button className="button_next" onClick={handleStepPrev}>
           Prev
         </button>
       </div>
