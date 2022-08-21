@@ -5,7 +5,7 @@ import Framework7 from "framework7/lite-bundle";
 import Framework7React from "framework7-react";
 import "framework7/css/bundle";
 Framework7.use(Framework7React);
-// sas
+// sase
 function App() {
   const [step, setStep] = useState(0);
   const _HandleStep = () => {
