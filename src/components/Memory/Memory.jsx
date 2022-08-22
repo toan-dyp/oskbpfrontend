@@ -1,16 +1,11 @@
 import { Progressbar } from "framework7-react";
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import PropTypes from "prop-types";
 import "./Memory.scss";
 import MemoryLabel from "../MemoryLabel/MemoryLabel";
 
-const Memory = ({ x }) => {
-  const [y, setY] = useState(0);
-
-  const TOTAL_STEPS = 8;
-
-  const PERCENT = [100 * (TOTAL_STEPS / 100)] * y;
-
+const Memory = ({ STEP, PERCENT }) => {
+  //Completed when percent = 100%
   const COLORS = useMemo(
     () => ({
       active: "#005EB8",
@@ -19,86 +14,38 @@ const Memory = ({ x }) => {
     }),
     []
   );
+  const COLOR_OF_STEP = {
+    STEP_1: COLORS.default,
+    STEP_2: COLORS.default,
+    STEP_3: COLORS.default,
+    STEP_4: COLORS.active,
+  };
+  const isCompleted = PERCENT === 100;
 
-  const COMPARE_STEPS = useMemo(
-    () => ({
-      COMPARE_1: 0,
-      COMPARE_2: 2,
-      COMPARE_3: 4,
-      COMPARE_4: 6,
-      COMPARE_5: 7,
-    }),
-    []
-  );
+  if (!isCompleted) {
+    const TOTAL_STEP = 3;
 
-  const PERCENTAGE_OF_PROGREESBAR = useMemo(
-    () => [
-      { STEP: 1, PERCENT: 0.15 },
-      { STEP: 2, PERCENT: 2.15 },
-      { STEP: 3, PERCENT: 4.3 },
-      { STEP: 4, PERCENT: 6.3 },
-      { STEP: 5, PERCENT: 8.5 },
-      { STEP: 6, PERCENT: 9.5 },
-      { STEP: 7, PERCENT: 11 },
-      { STEP: 8, PERCENT: 12.5 },
-    ],
-    []
-  );
-
-  const MemoryLabelList = useMemo(
-    () => [
-      {
-        start: COMPARE_STEPS.COMPARE_1,
-        end: COMPARE_STEPS.COMPARE_2,
-        label: "STEP 1",
-      },
-      {
-        start: COMPARE_STEPS.COMPARE_2,
-        end: COMPARE_STEPS.COMPARE_3,
-        label: "STEP 2",
-      },
-      {
-        start: COMPARE_STEPS.COMPARE_3,
-        end: COMPARE_STEPS.COMPARE_4,
-        label: "STEP 3",
-      },
-      {
-        complete: true,
-        label: "STEP 4",
-      },
-    ],
-    []
-  );
-
-  useEffect(() => {
-    x < TOTAL_STEPS && setY(PERCENTAGE_OF_PROGREESBAR[x].PERCENT);
-  }, [x]);
-
-  const handleChooseColor = useCallback(
-    (start = 0, end = 0) => {
-      let color = COLORS.default;
-
-      if (x >= start) {
-        color = x < end ? COLORS.active : COLORS.completed;
-      }
-
-      return color;
-    },
-    [x]
-  );
+    //Set Color Step following Prop Step
+    for (var index = 0; index < STEP; index++) {
+      COLOR_OF_STEP[`STEP_${index}`] = COLORS.completed;
+    }
+    COLOR_OF_STEP[`STEP_${STEP}`] = COLORS.active;
+  }
 
   return (
     <div className="memory">
       <div className="memory_label">
-        {MemoryLabelList.map((item, index) => (
-          <MemoryLabel
-            key={index}
-            color={handleChooseColor(item.start, item.end)}
-            label={item.label}
-            itemComplete={item.complete || false}
-            showItemComplete={x > COMPARE_STEPS.COMPARE_5}
-          />
-        ))}
+        {isCompleted ? (
+          <MemoryLabel color={COLOR_OF_STEP.STEP_4} isCompleted={isCompleted}>
+            Hoàn Thành
+          </MemoryLabel>
+        ) : (
+          <>
+            <MemoryLabel color={COLOR_OF_STEP.STEP_1}>Công việc 1</MemoryLabel>
+            <MemoryLabel color={COLOR_OF_STEP.STEP_2}>Công việc 2</MemoryLabel>
+            <MemoryLabel color={COLOR_OF_STEP.STEP_3}>Công việc 3</MemoryLabel>
+          </>
+        )}
       </div>
       <div className="memory_progressbar">
         <Progressbar progress={PERCENT} />
@@ -109,5 +56,6 @@ const Memory = ({ x }) => {
 export default Memory;
 
 Memory.propTypes = {
-  x: PropTypes.number,
+  STEP: PropTypes.number,
+  PERCENT: PropTypes.number,
 };

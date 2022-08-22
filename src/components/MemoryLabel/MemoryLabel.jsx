@@ -3,31 +3,30 @@ import { memo } from "react";
 
 MemoryLabel.propTypes = {
   color: PropTypes.string,
-  label: PropTypes.string,
-  complete: PropTypes.bool,
+  isCompleted: PropTypes.bool,
+  children: PropTypes.node,
 };
 
 MemoryLabel.defaultProps = {
   color: "",
-  label: "",
-  complete: false,
+  isCompleted: false,
+  children: "",
 };
 
-function MemoryLabel({ color, label, itemComplete, showItemComplete }) {
-  console.log({ color, label, itemComplete, showItemComplete });
+function MemoryLabel({ color, isCompleted, children }) {
+  console.log({ color, isCompleted, children });
   return (
     <>
-      {itemComplete && showItemComplete && (
+      {isCompleted ? (
         <div
           className="memory_label_wrap_complete"
           style={{
             color: color,
           }}
         >
-          {label}
+          {children}
         </div>
-      )}
-      {!itemComplete && !showItemComplete && (
+      ) : (
         <div className="memory_label_wrap">
           <div
             className="memory_label_wrap_bar"
@@ -41,7 +40,7 @@ function MemoryLabel({ color, label, itemComplete, showItemComplete }) {
               color: color,
             }}
           >
-            {label}
+            {children}
           </div>
         </div>
       )}

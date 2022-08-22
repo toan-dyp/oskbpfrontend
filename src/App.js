@@ -7,7 +7,21 @@ import "framework7/css/bundle";
 Framework7.use(Framework7React);
 // sase
 function App() {
+  const X = [
+    //For blood pressure
+    { STEP: 1, PERCENT: 0 },
+    { STEP: 1, PERCENT: 18 },
+    //For hearing
+    { STEP: 2, PERCENT: 35 },
+    { STEP: 2, PERCENT: 52 },
+    //For Goals
+    { STEP: 3, PERCENT: 68 },
+    { STEP: 3, PERCENT: 85 },
+    //Action goals completed
+    { STEP: 4, PERCENT: 100 },
+  ];
   const [step, setStep] = useState(0);
+
   const handleStep = () => {
     setStep(step + 1);
   };
@@ -17,7 +31,7 @@ function App() {
   return (
     //
     <div className="App">
-      <Memory x={step} />
+      <Memory {...X[step]} />
       <div className="button">
         <button className="button__next" onClick={handleStep}>
           NEXT
